@@ -15,4 +15,6 @@ func NewCustomerRouter(customerHandler *handlers.CustomerHandler) *CustomerRoute
 
 func (router *CustomerRouter) RegisterRoutes(server *gin.Engine) {
 	server.GET("/customers", router.customerHandler.GetAllCustomers)
+	server.GET("/customers/:id", router.customerHandler.GetCustomerById)
+	server.POST("/customers", router.customerHandler.CreateNewCustomer)
 }
