@@ -2,7 +2,6 @@ package main
 
 import (
 	"log"
-	"os"
 
 	"github.com/gin-gonic/gin"
 	"github.com/paulfernandosr/order-processor-golang/customer-service/config"
@@ -12,7 +11,7 @@ import (
 )
 
 func main() {
-	config.LoadEnvironment()
+	config.LoadEnviroment()
 
 	mongoClient := config.NewMongoClient()
 	customerRepository := repository.NewMongoCustomerRepository(mongoClient, "customerdb", "customers")
@@ -27,7 +26,7 @@ func InitializeServer(customerRouter *routes.CustomerRouter) {
 
 	customerRouter.RegisterRoutes(server)
 
-	err := server.Run(":" + os.Getenv("SERVER_PORT"))
+	err := server.Run(":" + config.EnvironmentProps.ServerPort)
 
 	if err != nil {
 		log.Fatal(err)

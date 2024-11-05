@@ -41,15 +41,15 @@ func (handler *CustomerHandler) GetCustomerById(context *gin.Context) {
 }
 
 func (handler *CustomerHandler) CreateNewCustomer(context *gin.Context) {
-	var customer models.Customer
-	err := context.ShouldBindJSON(&customer)
+	var customer *models.Customer
+	err := context.ShouldBindJSON(customer)
 
 	if err != nil {
 		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
-	err = handler.repository.CreateNewCustomer(context, &customer)
+	err = handler.repository.CreateNewCustomer(context, customer)
 
 	if err != nil {
 		context.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})

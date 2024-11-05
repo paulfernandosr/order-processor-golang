@@ -6,7 +6,7 @@ import (
 )
 
 type CustomerRepository interface {
-	FindAllCustomers(context *gin.Context) (*[]models.Customer, error)
+	FindAllCustomers(context *gin.Context) ([]models.Customer, error)
 	FindCustomerById(context *gin.Context, id string) (*models.Customer, error)
 	CreateNewCustomer(context *gin.Context, customer *models.Customer) error
 }

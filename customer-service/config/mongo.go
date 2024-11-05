@@ -11,18 +11,18 @@ import (
 )
 
 func NewMongoClient() *mongo.Client {
-	clientOptions := options.Client().ApplyURI(os.Getenv("MONGO_URI"))
+	clientOptions := options.Client().ApplyURI(os.Getenv(EnvironmentProps.MongoURI))
 
-	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	context, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 
-	MongoClient, err := mongo.Connect(ctx, clientOptions)
+	MongoClient, err := mongo.Connect(context, clientOptions)
 
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	err = MongoClient.Ping(ctx, nil)
+	err = MongoClient.Ping(context, nil)
 
 	if err != nil {
 		log.Fatal(err)

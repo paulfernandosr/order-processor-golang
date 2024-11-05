@@ -36,7 +36,7 @@ func NewMongoCustomerRepository(client *mongo.Client, databaseName string, colle
 	return &MongoCustomerRepository{collection}
 }
 
-func (repository *MongoCustomerRepository) FindAllCustomers(context *gin.Context) (*[]models.Customer, error) {
+func (repository *MongoCustomerRepository) FindAllCustomers(context *gin.Context) ([]models.Customer, error) {
 	cur, err := repository.collection.Find(context, bson.M{})
 
 	if err != nil {
@@ -52,7 +52,7 @@ func (repository *MongoCustomerRepository) FindAllCustomers(context *gin.Context
 		return nil, err
 	}
 
-	return &customers, nil
+	return customers, nil
 }
 
 func (repository *MongoCustomerRepository) FindCustomerById(context *gin.Context, id string) (*models.Customer, error) {
