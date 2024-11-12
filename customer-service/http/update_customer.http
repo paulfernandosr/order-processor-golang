@@ -1,0 +1,8 @@
+PUT http://localhost:8081/api/v1/customers/5
+Content-Type: application/json
+
+{
+    "name": "Customer ASD",
+    "email": "customerasd@gmail.com",
+    "address": "address1"
+}

@@ -3,7 +3,6 @@ package config
 import (
 	"context"
 	"log"
-	"os"
 	"time"
 
 	"go.mongodb.org/mongo-driver/mongo"
@@ -11,18 +10,18 @@ import (
 )
 
 func NewMongoClient() *mongo.Client {
-	clientOptions := options.Client().ApplyURI(os.Getenv(EnvironmentProps.MongoURI))
+	clientOptions := options.Client().ApplyURI(EnvProps.MongoURI)
 
-	context, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 
-	MongoClient, err := mongo.Connect(context, clientOptions)
+	mongoClient, err := mongo.Connect(ctx, clientOptions)
 
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	err = MongoClient.Ping(context, nil)
+	err = mongoClient.Ping(ctx, nil)
 
 	if err != nil {
 		log.Fatal(err)
@@ -30,5 +29,5 @@ func NewMongoClient() *mongo.Client {
 
 	log.Println("Successful connection to MongoDB")
 
-	return MongoClient
+	return mongoClient
 }

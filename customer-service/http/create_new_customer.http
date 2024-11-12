@@ -1,9 +1,9 @@
-POST http://localhost:8081/customers
+POST http://localhost:8081/api/v1/customers
 Content-Type: application/json
 
 {
     "customer_id": "2",
-    "name": "Customer 2",
+    "name": "customer2",
     "email": "customer2@gmail.com",
     "address": "address2"
 }
