@@ -7,23 +7,23 @@ import (
 	"github.com/joho/godotenv"
 )
 
-var EnvProps *Env
+var Props *Properties
 
-type Env struct {
+type Properties struct {
 	MongoURI           string
 	ServerPort         string
 	CustomerDatabase   string
 	CustomerCollection string
 }
 
-func LoadEnv() {
+func LoadEnvironment() {
 	err := godotenv.Load()
 
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	EnvProps = &Env{
+	Props = &Properties{
 		MongoURI:           os.Getenv("MONGO_URI"),
 		ServerPort:         os.Getenv("SERVER_PORT"),
 		CustomerDatabase:   os.Getenv("CUSTOMER_DATABASE"),

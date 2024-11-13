@@ -27,7 +27,7 @@ type MongoCustomerRepository struct {
 }
 
 func NewMongoCustomerRepository(client *mongo.Client) *MongoCustomerRepository {
-	collection := client.Database(config.EnvProps.CustomerDatabase).Collection(config.EnvProps.CustomerCollection)
+	collection := client.Database(config.Props.CustomerDatabase).Collection(config.Props.CustomerCollection)
 
 	indexModel := mongo.IndexModel{
 		Keys:    bson.D{{Key: "customer_id", Value: 1}},

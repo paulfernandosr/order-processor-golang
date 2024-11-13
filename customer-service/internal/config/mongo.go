@@ -10,7 +10,7 @@ import (
 )
 
 func NewMongoClient() *mongo.Client {
-	clientOptions := options.Client().ApplyURI(EnvProps.MongoURI)
+	clientOptions := options.Client().ApplyURI(Props.MongoURI)
 
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()

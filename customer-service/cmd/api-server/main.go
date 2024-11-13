@@ -13,7 +13,7 @@ import (
 )
 
 func main() {
-	config.LoadEnv()
+	config.LoadEnvironment()
 
 	mongoClient := config.NewMongoClient()
 	customerRepository := repository.NewMongoCustomerRepository(mongoClient)
@@ -31,7 +31,7 @@ func InitializeServer(customerRouter *router.CustomerRouter) {
 
 	customerRouter.SetUp(server)
 
-	err := server.Run(":" + config.EnvProps.ServerPort)
+	err := server.Run(":" + config.Props.ServerPort)
 
 	if err != nil {
 		log.Fatal(err)
