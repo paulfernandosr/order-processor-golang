@@ -1,0 +1,8 @@
+PUT http://localhost:8082/api/v1/products/2
+Content-Type: application/json
+
+{
+    "name": "customerasd@gmail.com",
+    "description": "address1",
+    "price": 40.21
+}

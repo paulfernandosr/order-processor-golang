@@ -1,9 +1,9 @@
-POST http://localhost:8081/products
+POST http://localhost:8082/api/v1/products
 Content-Type: application/json
 
 {
-    "product_id": "product-2",
-    "name": "product 2",
-    "description": "product description 2",
+    "product_id": "1",
+    "name": "product 1",
+    "description": "product description 1",
     "price": 40.50
 }
