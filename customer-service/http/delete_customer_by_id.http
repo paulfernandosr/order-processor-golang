@@ -1,1 +1,1 @@
-DELETE http://localhost:8081/api/v1/customers/12412
+DELETE http://localhost:8081/api/v1/customers/2

@@ -1,8 +1,10 @@
-PUT http://localhost:8081/api/v1/customers/5
+PUT http://localhost:8081/api/v1/customers/1
 Content-Type: application/json
 
 {
-    "name": "Customer ASD",
-    "email": "customerasd@gmail.com",
-    "address": "address1"
+    "customer_id": "1",
+    "name": "Customer 1",
+    "email": "customer1@gmail.com",
+    "address": "address1",
+    "is_active": true
 }

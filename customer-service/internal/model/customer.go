@@ -5,4 +5,5 @@ type Customer struct {
 	Name       string `json:"name" bson:"name" binding:"required"`
 	Email      string `json:"email" bson:"email" binding:"required"`
 	Address    string `json:"address" bson:"address"`
+	IsActive   bool   `json:"is_active" bson:"is_active" binding:"required"`
 }
