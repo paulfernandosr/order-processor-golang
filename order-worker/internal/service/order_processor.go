@@ -19,15 +19,15 @@ type OrderProcessor interface {
 }
 
 type OrderProcessorImpl struct {
-	lockerManager  repository.LockManager
+	lockManager    repository.LockManager
 	errorLogger    repository.ErrorLogger
 	customerReader repository.CustomerReader
 	productReader  repository.ProductReader
 	orderWriter    repository.OrderWriter
 }
 
-func NewOrderProcessorImpl(lockerManager repository.LockManager, errorLogger repository.ErrorLogger, customerReader repository.CustomerReader, productReader repository.ProductReader, orderWriter repository.OrderWriter) OrderProcessor {
-	return &OrderProcessorImpl{lockerManager, errorLogger, customerReader, productReader, orderWriter}
+func NewOrderProcessorImpl(lockManager repository.LockManager, errorLogger repository.ErrorLogger, customerReader repository.CustomerReader, productReader repository.ProductReader, orderWriter repository.OrderWriter) OrderProcessor {
+	return &OrderProcessorImpl{lockManager, errorLogger, customerReader, productReader, orderWriter}
 }
 
 func (orderProcessor *OrderProcessorImpl) Process(order *model.Order) {
@@ -38,7 +38,7 @@ func (orderProcessor *OrderProcessorImpl) Process(order *model.Order) {
 	errKey := helper.GenerateOrderErrorKey(order.OrderId)
 	clientId := uuid.NewString()
 
-	isAcquired, err := orderProcessor.lockerManager.AcquireLock(ctx, lockKey, clientId, 5*time.Second)
+	isAcquired, err := orderProcessor.lockManager.AcquireLock(ctx, lockKey, clientId, 5*time.Second)
 
 	if err != nil {
 		orderProcessor.errorLogger.LogError(ctx, errKey, err)
@@ -148,7 +148,7 @@ func (orderProcessor *OrderProcessorImpl) Process(order *model.Order) {
 		return
 	}
 
-	isReleased, err := orderProcessor.lockerManager.ReleaseLock(ctx, lockKey, clientId)
+	isReleased, err := orderProcessor.lockManager.ReleaseLock(ctx, lockKey, clientId)
 
 	if err != nil {
 		orderProcessor.errorLogger.LogError(ctx, errKey, err)
